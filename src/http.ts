@@ -53,11 +53,14 @@ export class HttpService {
     this.logger = generateChildLogger(logger, this.context);
     this.metrics = this.setMetrics();
     this.redis = new RedisService(this, this.logger);
-    this.ws = new WebSocketService(this, this.logger);
-    this.message = new MessageService(this, this.logger);
-    this.subscription = new SubscriptionService(this, this.logger);
-    this.notification = new NotificationService(this, this.logger);
-    this.redis.initialize().then(() => this.initialize());
+    this.redis.initialize().then(() => {
+      console.log('REDIS INITIALIZED!!!')
+      this.initialize();
+      this.ws = new WebSocketService(this, this.logger);
+      this.message = new MessageService(this, this.logger);
+      this.subscription = new SubscriptionService(this, this.logger);
+      this.notification = new NotificationService(this, this.logger);
+    });
   }
 
   public on(event: string, listener: any): void {
