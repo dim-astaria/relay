@@ -22,10 +22,12 @@ ENV NODE_ENV production
 
 WORKDIR /usr/src/app
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json entrypoint.sh ./
 COPY --from=base /usr/src/app/dist ./dist/
 COPY --from=production /usr/src/app/node_modules ./node_modules/
 
+RUN chmod +x ./entrypoint.sh
+
 USER node
 
-ENTRYPOINT ["node", "./dist/"]
+ENTRYPOINT ["./entrypoint.sh"]
