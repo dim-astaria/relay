@@ -36,7 +36,7 @@ export class MessageService {
     );
     if (!message) {
       await this.server.redis.setMessage(params);
-      this.server.redis.emit(PUB_SUB_TOPIC.messages.added, { params, socketId });
+      await this.server.redis.emit(PUB_SUB_TOPIC.messages.added, { params, socketId });
     }
   }
 

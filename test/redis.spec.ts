@@ -17,10 +17,11 @@ import { REDIS_NOTIFICATION_MAX_SIZE } from "../src/constants";
 
 describe("Redis", () => {
   let redis: RedisService;
-  before(() => {
+  before(async () => {
     const http = new HttpService(config);
     const logger = pino(getDefaultLoggerOptions({ level: "fatal" }));
     redis = new RedisService(http, logger);
+    redis.initialize();
   });
   it("setMessage", async () => {
     const params = {

@@ -57,8 +57,7 @@ export class HttpService {
     this.message = new MessageService(this, this.logger);
     this.subscription = new SubscriptionService(this, this.logger);
     this.notification = new NotificationService(this, this.logger);
-
-    this.initialize();
+    this.redis.initialize().then(() => this.initialize());
   }
 
   public on(event: string, listener: any): void {

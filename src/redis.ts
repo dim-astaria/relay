@@ -22,7 +22,7 @@ export class RedisService {
     this.publisher = this.client.duplicate();
     this.subscriber = this.client.duplicate();
     this.logger = generateChildLogger(logger, this.context);
-    this.initialize();
+    // this.initialize();
   }
 
   public async setMessage(params: RelayJsonRpc.PublishParams): Promise<void> {
@@ -162,13 +162,13 @@ export class RedisService {
 
   // ---------- Private ----------------------------------------------- //
 
-  private initialize(): void {
+  public async initialize(): Promise<void> {
     this.client.on("error", (e) => {
       this.logger.error(e);
     });
-    this.client.connect();
-    this.subscriber.connect();
-    this.publisher.connect();
+    await this.client.connect();
+    await this.subscriber.connect();
+    await this.publisher.connect();
     this.client.on("ready", () => {
       this.logger.trace("Initialized");
     });
