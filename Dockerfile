@@ -30,4 +30,4 @@ COPY --from=production /usr/src/app/node_modules ./node_modules/
 RUN chmod +x /usr/src/app/entrypoint.sh
 USER node
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
