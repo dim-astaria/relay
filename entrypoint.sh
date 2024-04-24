@@ -1,5 +1,5 @@
 #!/bin/sh
 
-sleep 5
+sleep 10
 
 node ./dist/index.js
